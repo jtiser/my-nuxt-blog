@@ -1,13 +1,23 @@
 <template>
-  <nuxt-link :to="postLink" class="post-preview">
-    <article>
-      <div class="post-thumbnail" :style="{backgroundImage: 'url(' + thumbnail + ')'}"></div>
-      <div class="post-content">
-        <h1>{{ title }}</h1>
+  <v-card :to="postLink" nuxt="true" hover flat>
+    <v-img class="white--text" height="200px" :src="thumbnail">
+      <v-container fill-height fluid>
+        <v-layout fill-height>
+          <v-flex xs12 align-end flexbox>
+            <h2 class="headline" style="text-shadow: 0px 2px 5px #222;">{{ title }}</h2>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-img>
+    <v-card-title>
+      <div>
         <p>{{ previewText }}</p>
       </div>
-    </article>
-  </nuxt-link>
+    </v-card-title>
+    <v-card-actions>
+      <v-btn color="success" flat outlined dark>Read more</v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
