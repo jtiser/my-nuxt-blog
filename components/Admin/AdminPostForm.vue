@@ -1,29 +1,37 @@
 <template>
-  <form @submit.prevent="onSave">
-    <AppControlInput v-model="editedPost.author">Author Name</AppControlInput>
-    <AppControlInput v-model="editedPost.title">Title</AppControlInput>
-    <AppControlInput v-model="editedPost.thumbnailLink">Thumbnail Link</AppControlInput>
-    <AppControlInput
-      control-type="textarea"
-      v-model="editedPost.content">Content</AppControlInput>
-    <AppButton type="submit">Save</AppButton>
-    <AppButton
-      type="button"
-      style="margin-left: 10px"
-      btn-style="cancel"
-      @click="onCancel">Cancel</AppButton>
-  </form>
+  <v-layout row wrap>
+    <v-flex xs12>
+      <v-card class="elevation-12">
+        <v-card-text>
+          <v-form>
+            <v-text-field
+              name="author"
+              label="Author Name"
+              id="author-name"
+              v-model="editedPost.author"
+            ></v-text-field>
+            <v-text-field name="title" label="Title" id="title" v-model="editedPost.title"></v-text-field>
+            <v-text-field
+              name="thumbnail-link"
+              label="Thumbnail Link"
+              id="thumbnail-link"
+              v-model="editedPost.thumbnailLink"
+            ></v-text-field>
+            <v-textarea label="Content" name="content" v-model="editedPost.content"></v-textarea>
+          </v-form>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="primary" @click="onSave">Save</v-btn>
+          <v-btn color="primary">Cancel</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
-import AppControlInput from "@/components/UI/AppControlInput";
-import AppButton from "@/components/UI/AppButton";
-
 export default {
-  components: {
-    AppControlInput,
-    AppButton
-  },
   props: {
     post: {
       type: Object,
@@ -35,22 +43,22 @@ export default {
       editedPost: this.post
         ? { ...this.post }
         : {
-            author: "",
-            title: "",
-            thumbnailLink: "",
-            content: ""
+            author: '',
+            title: '',
+            thumbnailLink: '',
+            content: ''
           }
-    };
+    }
   },
   methods: {
     onSave() {
       // Save the post
-      console.log(this.editedPost);
+      console.log(this.editedPost)
     },
     onCancel() {
       // Navigate back
-      this.$router.push("/admin");
+      this.$router.push('/admin')
     }
   }
-};
+}
 </script>
