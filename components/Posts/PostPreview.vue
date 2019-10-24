@@ -1,5 +1,5 @@
 <template>
-  <v-card :to="postLink" nuxt="true" hover flat>
+  <v-card :to="postLink" :nuxt="true" hover text>
     <v-img class="white--text" height="200px" :src="thumbnail">
       <v-container fill-height fluid>
         <v-layout fill-height>
@@ -15,7 +15,7 @@
       </div>
     </v-card-title>
     <v-card-actions>
-      <v-btn color="success" flat outlined dark>Read more</v-btn>
+      <v-btn color="success" text outlined dark>Read more</v-btn>
     </v-card-actions>
   </v-card>
 </template>
