@@ -26,34 +26,65 @@ export default {
   components: {
     PostList
   },
-  data() {
-    return {
-      loadedPosts: [
-        {
-          id: '1',
-          title: 'First Post',
-          previewText: 'My first post text',
-          thumbnail:
-            'https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg'
-        },
+  asyncData(context, callback) {
+    setTimeout(() => {
+      callback(null, {
+        loadedPosts: [
+          {
+            id: '1',
+            title: 'First Post',
+            previewText: 'My first post text',
+            thumbnail:
+              'https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg'
+          },
 
-        {
-          id: '2',
-          title: 'Second Post',
-          previewText: 'My second post text',
-          thumbnail:
-            'https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg'
-        },
+          {
+            id: '2',
+            title: 'Second Post',
+            previewText: 'My second post text',
+            thumbnail:
+              'https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg'
+          },
 
-        {
-          id: '3',
-          title: 'Third Post',
-          previewText: 'My third post text',
-          thumbnail:
-            'https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg'
-        }
-      ]
-    }
+          {
+            id: '3',
+            title: 'Third Post',
+            previewText: 'My third post text',
+            thumbnail:
+              'https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg'
+          }
+        ]
+      })
+    }, 2000)
   }
+  // data() {
+  //   return {
+  //     loadedPosts: [
+  //       {
+  //         id: '1',
+  //         title: 'First Post',
+  //         previewText: 'My first post text',
+  //         thumbnail:
+  //           'https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg'
+  //       },
+
+  //       {
+  //         id: '2',
+  //         title: 'Second Post',
+  //         previewText: 'My second post text',
+  //         thumbnail:
+  //           'https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg'
+  //       },
+
+  //       {
+  //         id: '3',
+  //         title: 'Third Post',
+  //         previewText: 'My third post text',
+  //         thumbnail:
+  //           'https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg'
+  //       }
+  //     ]
+  //   }
+  // }
 }
 </script>
