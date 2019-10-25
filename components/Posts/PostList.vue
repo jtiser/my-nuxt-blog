@@ -1,31 +1,13 @@
 <template>
   <v-container>
     <v-layout row wrap>
-      <v-flex xs12 sm6 lg4 pa-2>
+      <v-flex xs12 sm6 lg4 pa-2 v-for="post in posts" :key="post.id">
         <PostPreview
-          id="1"
+          :id="post.id"
           :is-admin="isAdmin"
-          thumbnail="https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg"
-          title="Hello there!"
-          previewText="This my first post!"
-        />
-      </v-flex>
-      <v-flex xs12 sm6 lg4 pa-2>
-        <PostPreview
-          id="2"
-          :is-admin="isAdmin"
-          thumbnail="https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg"
-          title="Hello there - the second time!"
-          previewText="This my second post!"
-        />
-      </v-flex>
-      <v-flex xs12 sm6 lg4 pa-2>
-        <PostPreview
-          id="3"
-          :is-admin="isAdmin"
-          thumbnail="https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg"
-          title="Hi!"
-          previewText="This my third post!"
+          :thumbnail="post.thumbnail"
+          :title="post.title"
+          :previewText="post.previewText"
         />
       </v-flex>
     </v-layout>
@@ -43,6 +25,10 @@ export default {
     isAdmin: {
       type: Boolean,
       default: false
+    },
+    posts: {
+      type: Array,
+      required: true
     }
   }
 }
