@@ -9,30 +9,34 @@
       <p class="post-content">{{loadedPost.content}}</p>
     </section>
     <section class="post-feedback">
-      <p>Let me know what you think about the post, send a mail to <a href="mailto:feedback@my-awesome-domain.com">feedback@my-awesome-domain.com</a>.</p>
+      <p>
+        Let me know what you think about the post, send a mail to
+        <a
+          href="mailto:feedback@my-awesome-domain.com"
+        >feedback@my-awesome-domain.com</a>.
+      </p>
     </section>
   </div>
 </template>
 
 <script>
-export default {
-   asyncData(context, callback) {
-    setTimeout(() => {
-      callback(null, {
-        loadedPost:
-          {
-            id: '1',
-            title: 'First Post (ID: ' + context.params.id+ ')',
-            previewText: 'My first post text',
-            author: "Julien",
-            updatedDate: new Date(),
-            content: 'Du contenu, et encore du contenu, en attendant mieux',
-            thumbnail:
-              'https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg'
-          },
+import axios from 'axios'
 
+export default {
+  asyncData(context) {
+    return axios
+      .get(
+        'https://my-nuxt-blog-ec514.firebaseio.com/posts/' +
+          context.params.id +
+          '.json'
+      )
+      .then(res => {
+        console.log('res=', res)
+        return {
+          loadedPost: res.data
+        }
       })
-    }, 500)
+      .catch(e => context.error(e))
   }
 }
 </script>
