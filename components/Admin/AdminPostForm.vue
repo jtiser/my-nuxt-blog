@@ -15,9 +15,10 @@
               name="thumbnail-link"
               label="Thumbnail Link"
               id="thumbnail-link"
-              v-model="editedPost.thumbnailLink"
+              v-model="editedPost.thumbnail"
             ></v-text-field>
             <v-textarea label="Content" name="content" v-model="editedPost.content"></v-textarea>
+            <v-textarea label="Preview" name="previewText" v-model="editedPost.previewText"></v-textarea>
           </v-form>
         </v-card-text>
         <v-card-actions>
@@ -45,8 +46,9 @@ export default {
         : {
             author: '',
             title: '',
-            thumbnailLink: '',
-            content: ''
+            thumbnail: '',
+            content: '',
+            previewText: ''
           }
     }
   },
