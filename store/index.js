@@ -1,4 +1,5 @@
 import Vuex from 'vuex'
+import Cookie from 'js-cookie'
 
 const createStore = () => {
   return new Vuex.Store({
@@ -81,10 +82,10 @@ const createStore = () => {
           .then(res => {
             vuexContext.commit('setToken', res.idToken)
             localStorage.setItem('token', res.idToken)
-            localStorage.setItem(
-              'tokenExpiration',
-              new Date().getTime() + res.expiresIn * 1000
-            )
+            const expirationDate = new Date().getTime() + res.expiresIn * 1000
+            localStorage.setItem('tokenExpiration', expirationDate)
+            Cookie.set('jwt', res.idToken)
+            Cookie.set('expirationDate', expirationDate)
             vuexContext.dispatch('setLogoutTimer', res.expiresIn)
           })
           .catch(e => {
@@ -96,10 +97,25 @@ const createStore = () => {
           vuexContext.commit('clearToken')
         }, duration)
       },
-      initAuth(vuexContext) {
-        const token = localStorage.getItem('token')
-        const expirationDate = localStorage.getItem('tokenExpiration')
-        if (new Date().getTime() > +expirationDate || !token) return
+      initAuth(vuexContext, req) {
+        let token, expirationDate
+        if (req) {
+          if (!req.headers.cookie) return
+          const jwtCookie = req.headers.cookie
+            .split(';')
+            .find(c => c.trim().startsWith('jwt='))
+          if (!jwtCookie) return
+          token = jwtCookie.split('=')[1]
+          const expirationDateCookie = req.headers.cookie
+            .split(';')
+            .find(c => c.trim().startsWith('expirationDate='))
+          if (!expirationDateCookie) return
+          expirationDate = expirationDateCookie.split('=')[1]
+        } else {
+          token = localStorage.getItem('token')
+          expirationDate = localStorage.getItem('tokenExpiration')
+          if (new Date().getTime() > +expirationDate || !token) return
+        }
         vuexContext.dispatch(
           'setLogoutTimer',
           +expirationDate - new Date().getTime
