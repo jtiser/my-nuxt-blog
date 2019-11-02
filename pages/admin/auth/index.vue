@@ -22,11 +22,11 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" @click.prevent="onLoginClick">{{ isLogin ? 'Login' : 'Sign Up' }}</v-btn>
+          <v-btn color="primary" @click.prevent="onLoginClick">{{ signUp ? 'Sign up' : 'Sign in' }}</v-btn>
           <v-btn
             color="primary"
-            @click="isLogin = !isLogin"
-          >Switch to {{ isLogin ? 'Signup' : 'Login' }}</v-btn>
+            @click="signUp = !signUp"
+          >Switch to {{ signUp ? 'Sign in' : 'Sign up' }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>
@@ -40,17 +40,21 @@ export default {
 
   data() {
     return {
-      isLogin: true,
+      signUp: true,
       email: '',
       password: ''
+    }
+  },
+  computed: {
+    apiEndPoint() {
+      return this.signUp ? 'accounts:signUp' : 'accounts:signInWithPassword'
     }
   },
   methods: {
     onLoginClick() {
       this.$axios
         .$post(
-          'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' +
-            process.env.firebaseApiKey,
+          `https://identitytoolkit.googleapis.com/v1/${this.apiEndPoint}?key=${process.env.firebaseApiKey}`,
           {
             email: this.email,
             password: this.password,
@@ -64,7 +68,8 @@ export default {
           console.log(e)
         })
     }
-  }
+  },
+  login() {}
 }
 </script>
 
