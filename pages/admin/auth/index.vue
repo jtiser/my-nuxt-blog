@@ -45,28 +45,15 @@ export default {
       password: ''
     }
   },
-  computed: {
-    apiEndPoint() {
-      return this.signUp ? 'accounts:signUp' : 'accounts:signInWithPassword'
-    }
-  },
   methods: {
     onLoginClick() {
-      this.$axios
-        .$post(
-          `https://identitytoolkit.googleapis.com/v1/${this.apiEndPoint}?key=${process.env.firebaseApiKey}`,
-          {
-            email: this.email,
-            password: this.password,
-            returnSecureToken: true
-          }
-        )
-        .then(res => {
-          console.log('res=', res)
+      this.$store
+        .dispatch('authenticateUser', {
+          email: this.email,
+          password: this.password,
+          signUp: this.signUp
         })
-        .catch(e => {
-          console.log(e)
-        })
+        .then(() => this.$router.push('/admin'))
     }
   },
   login() {}

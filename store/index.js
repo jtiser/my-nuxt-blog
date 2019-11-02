@@ -3,7 +3,8 @@ import Vuex from 'vuex'
 const createStore = () => {
   return new Vuex.Store({
     state: {
-      loadedPosts: []
+      loadedPosts: [],
+      token: null
     },
     mutations: {
       setPosts(state, posts) {
@@ -17,6 +18,9 @@ const createStore = () => {
           post => post.id === editedPost.id
         )
         state.loadedPosts[postIndex] = editedPost
+      },
+      setToken(state, token) {
+        state.token = token
       }
     },
     actions: {
@@ -54,6 +58,26 @@ const createStore = () => {
       },
       setPosts(vuexContext, posts) {
         vuexContext.commit('setPosts', posts)
+      },
+      authenticateUser(vuexContext, authData) {
+        const apiEndPoint = authData.signUp
+          ? 'accounts:signUp'
+          : 'accounts:signInWithPassword'
+        return this.$axios
+          .$post(
+            `https://identitytoolkit.googleapis.com/v1/${apiEndPoint}?key=${process.env.firebaseApiKey}`,
+            {
+              email: authData.email,
+              password: authData.password,
+              returnSecureToken: true
+            }
+          )
+          .then(res => {
+            vuexContext.commit('setToken', res.idToken)
+          })
+          .catch(e => {
+            console.log(e)
+          })
       }
     },
     getters: {
