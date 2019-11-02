@@ -1,52 +1,72 @@
 <template>
-  <div class="admin-auth-page">
-    <div class="auth-container">
-      <form>
-        <AppControlInput type="email">E-Mail Address</AppControlInput>
-        <AppControlInput type="password">Password</AppControlInput>
-        <AppButton type="submit">{{ isLogin ? 'Login' : 'Sign Up' }}</AppButton>
-        <AppButton
-          type="button"
-          btn-style="inverted"
-          style="margin-left: 10px"
-          @click="isLogin = !isLogin">Switch to {{ isLogin ? 'Signup' : 'Login' }}</AppButton>
-      </form>
-    </div>
-  </div>
+  <v-layout row wrap>
+    <v-flex xs12>
+      <v-card class="elevation-12">
+        <v-card-text>
+          <v-form>
+            <v-text-field
+              name="email"
+              label="E-Mail Address"
+              id="email"
+              type="email"
+              v-model="email"
+            ></v-text-field>
+            <v-text-field
+              name="password"
+              label="Password"
+              id="password"
+              type="password"
+              v-model="password"
+            ></v-text-field>
+          </v-form>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="primary" @click.prevent="onLoginClick">{{ isLogin ? 'Login' : 'Sign Up' }}</v-btn>
+          <v-btn
+            color="primary"
+            @click="isLogin = !isLogin"
+          >Switch to {{ isLogin ? 'Signup' : 'Login' }}</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
-import AppControlInput from '@/components/UI/AppControlInput'
-import AppButton from '@/components/UI/AppButton'
-
 export default {
   name: 'AdminAuthPage',
   layout: 'admin',
-  components: {
-    AppControlInput,
-    AppButton
-  },
+
   data() {
     return {
-      isLogin: true
+      isLogin: true,
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    onLoginClick() {
+      this.$axios
+        .$post(
+          'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' +
+            process.env.firebaseApiKey,
+          {
+            email: this.email,
+            password: this.password,
+            returnSecureToken: true
+          }
+        )
+        .then(res => {
+          console.log('res=', res)
+        })
+        .catch(e => {
+          console.log(e)
+        })
     }
   }
 }
 </script>
 
 <style scoped>
-.admin-auth-page {
-  padding: 20px;
-}
-
-.auth-container {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 2px #ccc;
-  width: 300px;
-  margin: auto;
-  padding: 10px;
-  box-sizing: border-box;
-}
 </style>
-
