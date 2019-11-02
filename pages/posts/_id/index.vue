@@ -25,11 +25,7 @@ import axios from 'axios'
 export default {
   asyncData(context) {
     return axios
-      .get(
-        process.env.baseUrl  +
-          context.params.id +
-          '.json'
-      )
+      .get(process.env.baseUrl + 'posts/' + context.params.id + '.json')
       .then(res => {
         console.log('res=', res)
         return {

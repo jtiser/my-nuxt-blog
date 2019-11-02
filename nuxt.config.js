@@ -79,6 +79,6 @@ export default {
   },
   env: {
     baseUrl:
-      process.env.BASE_URL || 'https://my-nuxt-blog-ec514.firebaseio.com/posts/'
+      process.env.BASE_URL || 'https://my-nuxt-blog-ec514.firebaseio.com/'
   }
 }
