@@ -30,7 +30,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/base'],
+  plugins: ['~/plugins/base', '~/plugins/date-filter'],
   /*
    ** Nuxt.js dev-modules
    */
