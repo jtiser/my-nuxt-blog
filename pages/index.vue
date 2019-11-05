@@ -1,6 +1,6 @@
 <template>
-  <div class="home-page">
-    <base-card dark>
+  <div>
+    <!-- <base-card dark>
       <v-img
         class="grey lighten-2"
         height="400"
@@ -14,7 +14,11 @@
           </v-flex>
         </v-layout>
       </v-img>
-    </base-card>
+    </base-card>-->
+    <PostList :posts="loadedPosts" />
+    <PostList :posts="loadedPosts" />
+    <PostList :posts="loadedPosts" />
+    <PostList :posts="loadedPosts" />
     <PostList :posts="loadedPosts" />
   </div>
 </template>

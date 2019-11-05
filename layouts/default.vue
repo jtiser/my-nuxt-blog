@@ -1,6 +1,30 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed app>
+    <!-- <v-app-bar
+      absolute
+      color="#fcb69f"
+      dark
+      shrink-on-scroll
+      src="https://picsum.photos/1920/1080?random"
+      scroll-target="#scrolling-techniques-2"
+    >-->
+    <v-app-bar absolute color="#fcb69f" dark src="https://picsum.photos/1920/1080?random">
+      <template v-slot:img="{ props }">
+        <v-img v-bind="props" gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"></v-img>
+      </template>
+
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+
+      <v-toolbar-title>{{title}}</v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-btn icon>
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
+    </v-app-bar>
+
+    <v-navigation-drawer v-model="drawer" temporary app>
       <v-list>
         <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact>
           <v-list-item-action>
@@ -12,46 +36,31 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn icon @click.stop="miniVariant = !miniVariant">
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
-      <!-- <v-btn icon @click.stop="clipped = !clipped">
-        <v-icon>mdi-application</v-icon>
-      </v-btn>-->
-      <!-- <v-btn icon @click.stop="fixed = !fixed">
-        <v-icon>mdi-minus</v-icon>
-      </v-btn>-->
-      <v-toolbar-title v-text="title" />
-      <v-spacer />
-      <!-- <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>-->
-    </v-app-bar>
-    <v-content>
+
+    <!-- <v-sheet id="scrolling-techniques-2" class="overflow-y-auto"> -->
+    <v-content mt-5 id="scrolling-techniques-2" class="overflow-y-auto custom-content">
       <v-container>
         <nuxt />
       </v-container>
     </v-content>
-    <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
-      <v-list>
-        <v-list-item @click.native="right = !right">
-          <v-list-item-action>
-            <v-icon light>mdi-repeat</v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-footer :fixed="fixed" app>
-      <span>&copy; 2019</span>
-    </v-footer>
+
+    <!-- <v-content id="scrolling-techniques-2" class="overflow-y-auto" max-height="1600">
+      <v-container style="height: 1000px;">
+        <nuxt />
+      </v-container>
+    </v-content>-->
+
+    <!-- </v-sheet> -->
+
+    <core-footer />
   </v-app>
 </template>
 
 <script>
 export default {
+  components: {
+    CoreFooter: () => import('@/components/core/Footer')
+  },
   data() {
     return {
       clipped: true,
@@ -87,3 +96,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.custom-content {
+  margin-top: 55px;
+}
+</style>
