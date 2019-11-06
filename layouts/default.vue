@@ -1,28 +1,6 @@
 <template>
   <v-app dark>
-    <v-app-bar
-      absolute
-      color="#fcb69f"
-      dark
-      shrink-on-scroll
-      src="https://picsum.photos/1920/1080?random"
-      scroll-target="#scrolling-techniques"
-    >
-      <template v-slot:img="{ props }">
-        <v-img v-bind="props" gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"></v-img>
-      </template>
-
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-
-      <v-toolbar-title>{{title}}</v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-    </v-app-bar>
-
+    <core-app-bar :title="title" :drawer="drawer" @nav-icon-clicked="drawer=!drawer"></core-app-bar>
     <v-navigation-drawer v-model="drawer" temporary app>
       <v-list>
         <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact>
@@ -50,7 +28,8 @@
 <script>
 export default {
   components: {
-    CoreFooter: () => import('@/components/core/Footer')
+    CoreFooter: () => import('@/components/core/Footer'),
+    CoreAppBar: () => import('@/components/core/AppBar')
   },
   data() {
     return {
