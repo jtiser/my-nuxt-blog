@@ -17,16 +17,19 @@
 
     <v-spacer></v-spacer>
 
-    <v-btn icon>
-      <v-icon>mdi-magnify</v-icon>
-    </v-btn>
+    <search-bar ref="search"></search-bar>
+    <link-btn class="ml-2" link="/">Home</link-btn>
+    <link-btn class="ml-2" link="/about">About</link-btn>
   </v-app-bar>
 </template>
 
 <script>
 export default {
   name: 'AppBar',
-
+  components: {
+    SearchBar: () => import('./SearchBar'),
+    LinkBtn: () => import('./LinkBtn')
+  },
   props: {
     title: {
       type: String,
