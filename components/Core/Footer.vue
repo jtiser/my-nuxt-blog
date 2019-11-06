@@ -1,5 +1,5 @@
 <template>
-  <v-footer class="py-4" height="auto">
+  <v-footer class="py-4 footer" height="auto">
     <v-container mx-auto>
       <v-layout wrap>
         <v-flex xs9>
@@ -60,3 +60,11 @@ export default {
   })
 }
 </script>
+
+
+<style scoped>
+/* TODO : fix this, not ideal */
+.footer {
+  margin-top: -136px;
+}
+</style>
