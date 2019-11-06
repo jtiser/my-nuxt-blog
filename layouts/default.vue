@@ -1,8 +1,8 @@
 <template>
   <v-app dark>
-    <core-app-bar :title="title" :drawer="drawer" @nav-icon-clicked="drawer=!drawer" />
+    <core-app-bar :title="title" @nav-icon-clicked="$refs.drawer.drawer = !$refs.drawer.drawer" />
 
-    <core-navigation-drawer :drawer="drawer" />
+    <core-navigation-drawer ref="drawer" />
 
     <v-flex ref="scroll" class="main-container" id="scrolling-techniques">
       <v-content class="content">
@@ -24,7 +24,6 @@ export default {
   },
   data() {
     return {
-      drawer: false,
       title: 'My blog using Nuxt'
     }
   }

@@ -31,10 +31,6 @@ export default {
     title: {
       type: String,
       default: ''
-    },
-    drawer: {
-      type: Boolean,
-      default: false
     }
   }
 }
