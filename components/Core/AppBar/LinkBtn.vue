@@ -1,5 +1,5 @@
 <template>
-  <v-btn text depressed v-bind="$attrs" v-on="$listeners" :nuxt="link">
+  <v-btn text depressed v-bind="$attrs" v-on="$listeners" nuxt :to="link">
     <slot />
   </v-btn>
 </template>
