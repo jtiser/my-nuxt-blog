@@ -1,14 +1,13 @@
 <template>
   <v-app dark>
-    <!-- <v-app-bar
+    <v-app-bar
       absolute
       color="#fcb69f"
       dark
       shrink-on-scroll
       src="https://picsum.photos/1920/1080?random"
-      scroll-target="#scrolling-techniques-2"
-    >-->
-    <v-app-bar absolute color="#fcb69f" dark src="https://picsum.photos/1920/1080?random">
+      scroll-target="#scrolling-techniques"
+    >
       <template v-slot:img="{ props }">
         <v-img v-bind="props" gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"></v-img>
       </template>
@@ -37,22 +36,14 @@
       </v-list>
     </v-navigation-drawer>
 
-    <!-- <v-sheet id="scrolling-techniques-2" class="overflow-y-auto"> -->
-    <v-content mt-5 id="scrolling-techniques-2" class="overflow-y-auto custom-content">
-      <v-container>
-        <nuxt />
-      </v-container>
-    </v-content>
-
-    <!-- <v-content id="scrolling-techniques-2" class="overflow-y-auto" max-height="1600">
-      <v-container style="height: 1000px;">
-        <nuxt />
-      </v-container>
-    </v-content>-->
-
-    <!-- </v-sheet> -->
-
-    <core-footer />
+    <v-flex ref="scroll" class="main-container" id="scrolling-techniques">
+      <v-content class="content">
+        <v-container>
+          <nuxt />
+        </v-container>
+      </v-content>
+      <core-footer />
+    </v-flex>
   </v-app>
 </template>
 
@@ -98,7 +89,24 @@ export default {
 </script>
 
 <style scoped>
-.custom-content {
+.main-container {
+  max-height: calc(100vh);
+  height: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-top: 65px;
   margin-top: 55px;
+}
+
+.content {
+  min-height: 2280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+}
+.content.short {
+  min-height: 0;
 }
 </style>
