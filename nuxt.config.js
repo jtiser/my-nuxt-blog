@@ -1,4 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
+const axios = require('axios')
 
 export default {
   mode: 'universal',
@@ -93,5 +94,23 @@ export default {
     baseUrl:
       process.env.BASE_URL || 'https://my-nuxt-blog-ec514.firebaseio.com/',
     firebaseApiKey: 'TODO'
+  },
+  generate: {
+    routes: function() {
+      return axios
+        .get('https://my-nuxt-blog-ec514.firebaseio.com/posts.json')
+        .then(res => {
+          const routes = []
+          for (const key in res.data) {
+            routes.push({
+              roue: '/posts/' + key,
+              payload: {
+                postData: res.data[key]
+              }
+            })
+          }
+          return routes
+        })
+    }
   }
 }
