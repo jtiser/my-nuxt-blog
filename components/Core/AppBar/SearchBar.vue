@@ -1,5 +1,6 @@
 <template>
   <v-text-field
+    class="search-bar-input"
     prepend-inner-icon="mdi-magnify"
     single-line
     hide-details
@@ -26,3 +27,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.search-bar-input {
+  max-width: 300px;
+}
+</style>
