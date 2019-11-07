@@ -1,11 +1,15 @@
 <template>
   <v-app dark>
-    <core-app-bar :title="title" @nav-icon-clicked="$refs.drawer.drawer = !$refs.drawer.drawer" />
+    <core-app-bar
+      v-show="showAppBar"
+      :title="title"
+      @nav-icon-clicked="$refs.drawer.drawer = !$refs.drawer.drawer"
+    />
 
     <core-navigation-drawer ref="drawer" />
 
     <v-flex ref="scroll" class="main-container" id="scrolling-techniques">
-      <v-content class="content">
+      <v-content class="content" v-scroll:#scrolling-techniques="onScroll">
         <v-container>
           <nuxt />
         </v-container>
@@ -24,7 +28,21 @@ export default {
   },
   data() {
     return {
-      title: 'My blog using Nuxt'
+      title: 'My blog using Nuxt',
+      previousOffsetTop: 0,
+      scrollTop: true,
+      minScrollDistance: 800
+    }
+  },
+  computed: {
+    showAppBar() {
+      return this.scrollTop || this.previousOffsetTop < this.minScrollDistance
+    }
+  },
+  methods: {
+    onScroll(e) {
+      this.scrollTop = this.previousOffsetTop > e.target.scrollTop
+      this.previousOffsetTop = e.target.scrollTop
     }
   }
 }

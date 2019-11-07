@@ -1,15 +1,14 @@
 <template>
   <v-app-bar
     absolute
-    color="#fcb69f"
     dark
+    color="primary darken-2"
     shrink-on-scroll
-    src="https://picsum.photos/1920/1080?random"
     scroll-target="#scrolling-techniques"
   >
-    <template v-slot:img="{ props }">
-      <v-img v-bind="props" gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"></v-img>
-    </template>
+    <!-- <template v-slot:img="{ props }">
+      <v-img v-bind="props"></v-img>
+    </template>-->
 
     <v-app-bar-nav-icon @click.stop="$emit('nav-icon-clicked')"></v-app-bar-nav-icon>
 
