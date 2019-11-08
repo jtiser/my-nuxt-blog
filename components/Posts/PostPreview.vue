@@ -1,5 +1,5 @@
 <template>
-  <v-card :to="postLink" :nuxt="true" hover text>
+  <v-card :to="postLink" max-height="500px" :nuxt="true" hover text>
     <v-img class="white--text" height="200px" :src="thumbnail">
       <v-container fill-height fluid>
         <v-layout fill-height>
@@ -9,13 +9,12 @@
         </v-layout>
       </v-container>
     </v-img>
-    <v-card-title>
-      <div>
-        <p>{{ previewText }}</p>
-      </div>
-    </v-card-title>
+    <v-card-subtitle>{{date | date}}</v-card-subtitle>
+    <v-card-text>
+      <p class="font-weight-light body-2 post-preview">{{ displayedPreviewText }}</p>
+    </v-card-text>
     <v-card-actions>
-      <v-btn color="success" text outlined dark>Read more</v-btn>
+      <v-btn color="primary" text outlined dark>Continuer</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -43,51 +42,20 @@ export default {
     thumbnail: {
       type: String,
       required: true
+    },
+    date: {
+      type: String
     }
   },
   computed: {
     postLink() {
       return this.isAdmin ? '/admin/' + this.id : '/posts/' + this.id
+    },
+    displayedPreviewText() {
+      const truncateValue = 450
+      if (this.previewText.length < truncateValue) return this.previewText
+      return this.previewText.substring(0, truncateValue) + '...'
     }
   }
 }
 </script>
-
-
-<style scoped>
-.post-preview {
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 2px #ccc;
-  background-color: white;
-  width: 90%;
-}
-
-a {
-  text-decoration: none;
-  color: black;
-}
-
-@media (min-width: 850px) {
-  .post-preview {
-    width: 400px;
-    margin: 10px;
-  }
-}
-
-.post-thumbnail {
-  width: 100%;
-  height: 200px;
-  background-position: center;
-  background-size: cover;
-}
-
-.post-content {
-  padding: 10px;
-  text-align: center;
-}
-
-a:hover .post-content,
-a:active .post-content {
-  background-color: #ccc;
-}
-</style>

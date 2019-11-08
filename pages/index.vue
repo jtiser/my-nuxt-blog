@@ -16,10 +16,6 @@
       </v-img>
     </base-card>-->
     <PostList :posts="loadedPosts" />
-    <PostList :posts="loadedPosts" />
-    <PostList :posts="loadedPosts" />
-    <PostList :posts="loadedPosts" />
-    <PostList :posts="loadedPosts" />
   </div>
 </template>
 
