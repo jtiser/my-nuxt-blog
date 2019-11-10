@@ -8,13 +8,13 @@
 
     <core-navigation-drawer ref="drawer" />
 
-    <v-content class="content" id="scrolling-techniques">
+    <v-content class="content colorized-content" id="scrolling-techniques">
       <v-container v-scroll:#scrolling-techniques="onScroll">
         <nuxt />
       </v-container>
     </v-content>
 
-    <core-footer />
+    <core-footer class="colorized-content" />
   </v-app>
 </template>
 
@@ -51,5 +51,10 @@ export default {
 .content {
   padding-top: 75px !important;
   margin-top: 55px;
+}
+
+.colorized-content {
+  background-color: rgb(236, 231, 231);
+  /* background-color: rgb(219, 212, 212); */
 }
 </style>

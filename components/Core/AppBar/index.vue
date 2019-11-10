@@ -7,7 +7,7 @@
     :src="require(`~/assets/images/space02.jpeg`)"
   >
     <template v-slot:img="{ props }">
-      <v-img v-bind="props" gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"></v-img>
+      <v-img v-bind="props" gradient="to top right, rgba(19,84,122,.5), #4a148c"></v-img>
     </template>
 
     <v-app-bar-nav-icon @click.stop="$emit('nav-icon-clicked')"></v-app-bar-nav-icon>
