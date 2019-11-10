@@ -12,7 +12,7 @@
       </v-img>
       <v-card-subtitle>{{loadedPost.updatedDate | date}}</v-card-subtitle>
       <v-card-text>
-        <p class="font-weight-light body-2 post-preview">{{ loadedPost.content }}</p>
+        <p class="text--primary body-2">{{ loadedPost.content }}</p>
       </v-card-text>
     </v-card>
   </section>

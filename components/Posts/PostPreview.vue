@@ -10,8 +10,8 @@
       </v-container>
     </v-img>
     <v-card-subtitle>{{date | date}}</v-card-subtitle>
-    <v-card-text>
-      <p class="font-weight-light body-2 post-preview">{{ displayedPreviewText }}</p>
+    <v-card-text class="text--primary body-2">
+      <p>{{ displayedPreviewText }}</p>
     </v-card-text>
     <v-card-actions>
       <v-btn color="primary" text outlined dark>Continuer</v-btn>
