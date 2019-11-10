@@ -49,7 +49,7 @@ export default {
 
 <style scoped>
 .content {
-  padding-top: 65px !important;
+  padding-top: 75px !important;
   margin-top: 55px;
 }
 </style>

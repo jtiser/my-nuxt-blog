@@ -1,23 +1,21 @@
 <template>
-  <div class="single-post-page">
-    <section class="post">
-      <v-card class="pa-5">
-        <v-img class="white--text" height="200px" :src="loadedPost.thumbnail">
-          <v-container fill-height fluid>
-            <v-layout fill-height>
-              <v-flex xs12 align-end flexbox>
-                <h2 class="headline" style="text-shadow: 0px 2px 5px #222;">{{ loadedPost.title }}</h2>
-              </v-flex>
-            </v-layout>
-          </v-container>
-        </v-img>
-        <v-card-subtitle>{{loadedPost.updatedDate | date}}</v-card-subtitle>
-        <v-card-text>
-          <p class="font-weight-light body-2 post-preview">{{ loadedPost.content }}</p>
-        </v-card-text>
-      </v-card>
-    </section>
-  </div>
+  <section class="post">
+    <v-card class="pa-5">
+      <v-img class="white--text" height="200px" :src="loadedPost.thumbnail">
+        <v-container fill-height fluid>
+          <v-layout fill-height>
+            <v-flex xs12 align-end flexbox>
+              <h2 class="headline" style="text-shadow: 0px 2px 5px #222;">{{ loadedPost.title }}</h2>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-img>
+      <v-card-subtitle>{{loadedPost.updatedDate | date}}</v-card-subtitle>
+      <v-card-text>
+        <p class="font-weight-light body-2 post-preview">{{ loadedPost.content }}</p>
+      </v-card-text>
+    </v-card>
+  </section>
 </template>
 
 <script>

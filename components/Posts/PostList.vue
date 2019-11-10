@@ -1,18 +1,16 @@
 <template>
-  <v-container>
-    <v-layout row wrap>
-      <v-flex xs12 sm6 lg3 pa-2 v-for="post in posts" :key="post.id">
-        <PostPreview
-          :id="post.id"
-          :is-admin="isAdmin"
-          :thumbnail="post.thumbnail"
-          :title="post.title"
-          :previewText="post.previewText"
-          :date="post.updatedDate"
-        />
-      </v-flex>
-    </v-layout>
-  </v-container>
+  <v-layout row wrap>
+    <v-flex xs12 sm6 lg3 pa-2 v-for="post in posts" :key="post.id">
+      <PostPreview
+        :id="post.id"
+        :is-admin="isAdmin"
+        :thumbnail="post.thumbnail"
+        :title="post.title"
+        :previewText="post.previewText"
+        :date="post.updatedDate"
+      />
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
