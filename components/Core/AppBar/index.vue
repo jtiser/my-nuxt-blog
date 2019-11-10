@@ -10,15 +10,14 @@
       <v-img v-bind="props" gradient="to top right, rgba(19,84,122,.5), #4a148c"></v-img>
     </template>
 
-    <v-app-bar-nav-icon @click.stop="$emit('nav-icon-clicked')"></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon class="d-lg-none" @click.stop="$emit('nav-icon-clicked')"></v-app-bar-nav-icon>
 
     <v-toolbar-title>{{title}}</v-toolbar-title>
 
     <v-spacer></v-spacer>
-
-    <search-bar ref="search"></search-bar>
-    <link-btn class="ml-2" link="/">Home</link-btn>
-    <link-btn class="ml-2" link="/about">About</link-btn>
+    <search-bar v-show="breakpointDisplayReached" ref="search"></search-bar>
+    <link-btn v-show="breakpointDisplayReached" class="ml-2" link="/">Home</link-btn>
+    <link-btn v-show="breakpointDisplayReached" class="ml-2" link="/about">About</link-btn>
   </v-app-bar>
 </template>
 
@@ -33,6 +32,11 @@ export default {
     title: {
       type: String,
       default: ''
+    }
+  },
+  computed: {
+    breakpointDisplayReached() {
+      return this.$vuetify.breakpoint.lg
     }
   }
 }
