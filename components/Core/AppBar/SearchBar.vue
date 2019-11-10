@@ -2,6 +2,7 @@
   <v-text-field
     class="search-bar-input"
     prepend-inner-icon="mdi-magnify"
+    solo-inverted
     single-line
     hide-details
     dense
