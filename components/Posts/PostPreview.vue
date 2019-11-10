@@ -1,5 +1,5 @@
 <template>
-  <v-card :to="postLink" max-height="500px" :nuxt="true" hover text>
+  <v-card :to="postLink" :nuxt="true" hover text>
     <v-img class="white--text" height="200px" :src="thumbnail">
       <v-container fill-height fluid>
         <v-layout fill-height>
