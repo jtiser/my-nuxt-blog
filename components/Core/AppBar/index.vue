@@ -1,11 +1,5 @@
 <template>
-  <v-app-bar
-    absolute
-    dark
-    color="primary darken-2"
-    shrink-on-scroll
-    scroll-target="#scrolling-techniques"
-  >
+  <v-app-bar fixed dark color="primary darken-2" shrink-on-scroll>
     <!-- <template v-slot:img="{ props }">
       <v-img v-bind="props"></v-img>
     </template>-->

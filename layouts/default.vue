@@ -8,14 +8,13 @@
 
     <core-navigation-drawer ref="drawer" />
 
-    <v-flex ref="scroll" class="main-container" id="scrolling-techniques">
-      <v-content class="content" v-scroll:#scrolling-techniques="onScroll">
-        <v-container>
-          <nuxt />
-        </v-container>
-      </v-content>
-      <core-footer />
-    </v-flex>
+    <v-content class="content" id="scrolling-techniques">
+      <v-container v-scroll:#scrolling-techniques="onScroll">
+        <nuxt />
+      </v-container>
+    </v-content>
+
+    <core-footer />
   </v-app>
 </template>
 
@@ -49,24 +48,8 @@ export default {
 </script>
 
 <style scoped>
-.main-container {
-  max-height: calc(100vh);
-  height: auto;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding-top: 65px;
-  margin-top: 55px;
-}
-
 .content {
-  min-height: 2280px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 32px;
-}
-.content.short {
-  min-height: 0;
+  padding-top: 65px !important;
+  margin-top: 55px;
 }
 </style>
