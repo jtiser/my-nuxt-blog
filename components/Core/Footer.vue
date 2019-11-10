@@ -7,7 +7,7 @@
             v-for="(item, i) in items"
             :key="i"
             :href="item.href"
-            class="ml-0 mr-3"
+            class="ml-0 mr-3 mb-1"
             color="primary"
             square
             target="_blank"
