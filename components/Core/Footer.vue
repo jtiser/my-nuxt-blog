@@ -61,11 +61,3 @@ export default {
   })
 }
 </script>
-
-
-<style scoped>
-/* TODO : fix this, not ideal */
-.footer {
-  margin-top: -136px;
-}
-</style>
