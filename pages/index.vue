@@ -3,6 +3,12 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import {
+  name as postsModule,
+  gettersTypes as postsGetters
+} from '@/store/modules/posts'
+
 import PostList from '@/components/Posts/PostList'
 
 export default {
@@ -10,9 +16,7 @@ export default {
     PostList
   },
   computed: {
-    loadedPosts() {
-      return this.$store.getters.loadedPosts
-    }
+    ...mapGetters(postsModule, [postsGetters.loadedPosts])
   }
 }
 </script>

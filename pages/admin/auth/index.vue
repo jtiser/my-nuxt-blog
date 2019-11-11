@@ -34,6 +34,12 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+import {
+  actionsTypes as authenticationActions,
+  name as authenticationModule
+} from '@/store/modules/authentication'
+
 export default {
   name: 'AdminAuthPage',
   layout: 'admin',
@@ -46,19 +52,21 @@ export default {
     }
   },
   methods: {
-    onLoginClick() {
-      this.$store
-        .dispatch('authenticateUser', {
+    ...mapActions(authenticationModule, [
+      authenticationActions.authenticateUser
+    ]),
+    async onLoginClick() {
+      try {
+        await this.authenticateUser({
           email: this.email,
           password: this.password,
           signUp: this.signUp
         })
-        .then(() => this.$router.push('/admin'))
+        this.$router.push('/admin')
+      } catch (exception) {
+        console.log(exception)
+      }
     }
-  },
-  login() {}
+  }
 }
 </script>
-
-<style scoped>
-</style>
