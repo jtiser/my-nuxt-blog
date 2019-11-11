@@ -1,13 +1,25 @@
-import Vuex from 'vuex'
+import {
+  name as postModule,
+  actionsTypes as postActions
+} from './modules/posts'
+
 import modules from './modules'
+export { modules }
 
-import actions from './actions'
-
-const createStore = () => {
-  return new Vuex.Store({
-    modules,
-    actions
-  })
+export const actions = {
+  nuxtServerInit({ dispatch }, context) {
+    console.log('in this stuff')
+    return context.app.$axios
+      .$get('posts.json')
+      .then(data => {
+        const postsArray = []
+        for (const key in data) {
+          postsArray.push({ ...data[key], id: key })
+        }
+        dispatch(`${postModule}/${postActions.setPosts}`, postsArray, {
+          root: true
+        })
+      })
+      .catch(e => context.error(e))
+  }
 }
-
-export default createStore

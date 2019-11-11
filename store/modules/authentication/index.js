@@ -3,19 +3,10 @@ import gettersTypes from './getters-types'
 import actions from './actions'
 import actionsTypes from './actions-types'
 import mutations from './mutations'
+const name = 'modules/authentication'
 
-const name = 'authentication'
-
-const state = {
+const state = () => ({
   token: null
-}
+})
 
-const moduleAuthentication = {
-  namespaced: true,
-  state,
-  getters,
-  actions,
-  mutations
-}
-
-export { name, moduleAuthentication, actionsTypes, gettersTypes }
+export { name, state, getters, actions, mutations, actionsTypes, gettersTypes }

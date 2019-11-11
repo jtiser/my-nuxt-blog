@@ -4,18 +4,10 @@ import actions from './actions'
 import actionsTypes from './actions-types'
 import mutations from './mutations'
 
-const name = 'posts'
+const name = 'modules/posts'
 
-const state = {
+const state = () => ({
   loadedPosts: null
-}
+})
 
-const modulePosts = {
-  namespaced: true,
-  state,
-  getters,
-  actions,
-  mutations
-}
-
-export { name, modulePosts, actionsTypes, gettersTypes }
+export { name, state, getters, actions, mutations, actionsTypes, gettersTypes }
