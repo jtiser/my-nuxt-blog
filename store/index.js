@@ -1,14 +1,7 @@
-import {
-  name as postModule,
-  actionsTypes as postActions
-} from './modules/posts'
-
-import modules from './modules'
-export { modules }
+import { name as postModule, actionsTypes as postActions } from './posts'
 
 export const actions = {
   nuxtServerInit({ dispatch }, context) {
-    console.log('in this stuff')
     return context.app.$axios
       .$get('posts.json')
       .then(data => {

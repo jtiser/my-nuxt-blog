@@ -3,11 +3,10 @@ import gettersTypes from './getters-types'
 import actions from './actions'
 import actionsTypes from './actions-types'
 import mutations from './mutations'
-
-const name = 'modules/posts'
+const name = 'authentication'
 
 const state = () => ({
-  loadedPosts: null
+  token: null
 })
 
 export { name, state, getters, actions, mutations, actionsTypes, gettersTypes }

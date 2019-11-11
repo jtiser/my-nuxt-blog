@@ -12,7 +12,7 @@ import {
   name as postsModule,
   gettersTypes as postsGetters,
   actionsTypes as postsActions
-} from '@/store/modules/posts'
+} from '@/store/posts'
 
 import AdminPostForm from '@/components/Admin/AdminPostForm'
 

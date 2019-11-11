@@ -7,7 +7,7 @@ import { mapGetters } from 'vuex'
 import {
   name as postsModule,
   gettersTypes as postsGetters
-} from '@/store/modules/posts'
+} from '@/store/posts'
 
 import PostList from '@/components/Posts/PostList'
 

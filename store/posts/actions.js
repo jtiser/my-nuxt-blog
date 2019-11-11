@@ -4,7 +4,7 @@ import actions from './actions-types'
 import {
   gettersTypes as authenticationGetters,
   name as authenticationModule
-} from '@/store/modules/authentication'
+} from '~/store/authentication'
 
 const storeActions = {
   [actions.addPost]: async function(

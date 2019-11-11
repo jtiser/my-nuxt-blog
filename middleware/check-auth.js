@@ -1,7 +1,7 @@
 import {
   actionsTypes as authenticationActions,
   name as authenticationModule
-} from '@/store/modules/authentication'
+} from '~/store/authentication'
 
 export default function(context) {
   context.store.dispatch(

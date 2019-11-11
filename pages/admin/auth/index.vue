@@ -38,7 +38,7 @@ import { mapActions } from 'vuex'
 import {
   actionsTypes as authenticationActions,
   name as authenticationModule
-} from '@/store/modules/authentication'
+} from '@/store/authentication'
 
 export default {
   name: 'AdminAuthPage',

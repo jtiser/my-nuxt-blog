@@ -16,11 +16,11 @@ import { mapGetters, mapActions } from 'vuex'
 import {
   name as postsModule,
   gettersTypes as postsGetters
-} from '@/store/modules/posts'
+} from '@/store/posts'
 import {
   actionsTypes as authenticationActions,
   name as authenticationModule
-} from '@/store/modules/authentication'
+} from '@/store/authentication'
 
 import PostList from '@/components/Posts/PostList'
 
