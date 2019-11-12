@@ -42,7 +42,10 @@ const storeActions = {
     commit(mutations.EDIT_POST, editedPost)
   },
 
-  [actions.setPosts]: ({ commit }, posts) => {
+  [actions.setPosts]: function({ commit }, posts) {
+    console.log('before', this.$postRepository)
+    this.$postRepository.index()
+
     commit(mutations.SET_POSTS, posts)
   }
 }
