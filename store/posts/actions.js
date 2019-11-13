@@ -18,10 +18,8 @@ const storeActions = {
     const token =
       rootGetters[`${authenticationModule}/${authenticationGetters.token}`]
 
-    const data = await this.$axios.$post(
-      `posts.json?auth=${token}`,
-      createdPost
-    )
+    const data = await this.$apiService.createPost(token, createdPost)
+
     commit(mutations.ADD_POST, {
       ...createdPost,
       id: data.name
@@ -35,17 +33,12 @@ const storeActions = {
     const token =
       rootGetters[`${authenticationModule}/${authenticationGetters.token}`]
 
-    await this.$axios.$put(
-      `posts/${editedPost.id}.json?auth=${token}`,
-      editedPost
-    )
+    await this.$apiService.editPost(token, editedPost)
+
     commit(mutations.EDIT_POST, editedPost)
   },
 
   [actions.setPosts]: function({ commit }, posts) {
-    console.log('before', this.$postRepository)
-    this.$postRepository.index()
-
     commit(mutations.SET_POSTS, posts)
   }
 }

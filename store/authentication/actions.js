@@ -5,17 +5,16 @@ import Cookie from 'js-cookie'
 const storeActions = {
   [actions.authenticateUser]: async function({ commit }, authData) {
     try {
-      const apiEndPoint = authData.signUp
-        ? 'accounts:signUp'
-        : 'accounts:signInWithPassword'
-      const res = await this.$axios.$post(
-        `https://identitytoolkit.googleapis.com/v1/${apiEndPoint}?key=${process.env.firebaseApiKey}`,
-        {
-          email: authData.email,
-          password: authData.password,
-          returnSecureToken: true
-        }
-      )
+      const data = {
+        email: authData.email,
+        password: authData.password,
+        returnSecureToken: true
+      }
+      let res = null
+      if (authData.signUp) res = await this.$apiService.signUp(data)
+      else res = await this.$apiService.signIn(data)
+      // TODO check if res et res.data...
+      res = res.data
       commit(mutations.SET_TOKEN, res.idToken)
       localStorage.setItem('token', res.idToken)
       const expirationDate =
