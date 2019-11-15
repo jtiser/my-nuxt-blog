@@ -7,7 +7,13 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { mapGetters, mapActions } from 'vuex'
+import {
+  name as postsModule,
+  gettersTypes as postsGetters,
+  actionsTypes as postsActions
+} from '@/store/posts'
+
 import AdminPostForm from '@/components/Admin/AdminPostForm'
 
 export default {
@@ -18,10 +24,11 @@ export default {
     AdminPostForm
   },
   methods: {
-    onSubmitted(postData) {
-      this.$store.dispatch('addPost', postData).then(() => {
-        this.$router.push('/admin')
-      })
+    ...mapActions(postsModule, [postsActions.addPost]),
+
+    async onSubmitted(postData) {
+      await this.addPost(postData)
+      this.$router.push('/admin')
     }
   }
 }

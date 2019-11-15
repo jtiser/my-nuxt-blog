@@ -7,6 +7,13 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+import {
+  name as postsModule,
+  gettersTypes as postsGetters,
+  actionsTypes as postsActions
+} from '@/store/posts'
+
 import AdminPostForm from '@/components/Admin/AdminPostForm'
 
 export default {
@@ -26,10 +33,11 @@ export default {
       .catch(e => context.error(e))
   },
   methods: {
-    onSubmitted(editedPost) {
-      this.$store.dispatch('editPost', editedPost).then(() => {
-        this.$router.push('/admin')
-      })
+    ...mapActions(postsModule, [postsActions.editPost]),
+
+    async onSubmitted(editedPost) {
+      await this.editPost(editedPost)
+      this.$router.push('/admin')
     }
   }
 }

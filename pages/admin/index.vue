@@ -12,6 +12,16 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+import {
+  name as postsModule,
+  gettersTypes as postsGetters
+} from '@/store/posts'
+import {
+  actionsTypes as authenticationActions,
+  name as authenticationModule
+} from '@/store/authentication'
+
 import PostList from '@/components/Posts/PostList'
 
 export default {
@@ -21,13 +31,12 @@ export default {
     PostList
   },
   computed: {
-    loadedPosts() {
-      return this.$store.getters.loadedPosts
-    }
+    ...mapGetters(postsModule, [postsGetters.loadedPosts])
   },
   methods: {
+    ...mapActions(authenticationModule, [authenticationActions.logout]),
     onLogout() {
-      this.$store.dispatch('logout')
+      this.logout()
       this.$router.push('/admin/auth')
     }
   }
