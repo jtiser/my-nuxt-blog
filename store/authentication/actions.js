@@ -1,20 +1,24 @@
 import mutations from './mutations-types'
 import actions from './actions-types'
 import Cookie from 'js-cookie'
+import { name as apiModule, actionsTypes as apiActions } from '@/store/api'
 
 const storeActions = {
-  [actions.authenticateUser]: async function({ commit }, authData) {
+  [actions.authenticateUser]: async function({ dispatch, commit }, authData) {
     try {
       const data = {
         email: authData.email,
-        password: authData.password,
-        returnSecureToken: true
+        password: authData.password
       }
       let res = null
-      if (authData.signUp) res = await this.$apiService.signUp(data)
-      else res = await this.$apiService.signIn(data)
-      // TODO check if res et res.data...
-      res = res.data
+      if (authData.signUp)
+        res = await dispatch(`${apiModule}/${apiActions.signUp}`, data, {
+          root: true
+        })
+      else
+        res = await dispatch(`${apiModule}/${apiActions.signIn}`, data, {
+          root: true
+        })
       commit(mutations.SET_TOKEN, res.idToken)
       localStorage.setItem('token', res.idToken)
       const expirationDate =

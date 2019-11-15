@@ -1,40 +1,30 @@
 import mutations from './mutations-types'
 import actions from './actions-types'
-
-import {
-  gettersTypes as authenticationGetters,
-  name as authenticationModule
-} from '~/store/authentication'
+import { name as apiModule, actionsTypes as apiActions } from '@/store/api'
 
 const storeActions = {
-  [actions.addPost]: async function(
-    { commit, _rootState, rootGetters },
-    postData
-  ) {
+  [actions.addPost]: async function({ commit, dispatch }, postData) {
     const createdPost = {
       ...postData,
       updatedDate: new Date()
     }
-    const token =
-      rootGetters[`${authenticationModule}/${authenticationGetters.token}`]
-
-    const data = await this.$apiService.createPost(token, createdPost)
-
+    const data = await dispatch(
+      `${apiModule}/${apiActions.createPost}`,
+      createdPost,
+      {
+        root: true
+      }
+    )
     commit(mutations.ADD_POST, {
       ...createdPost,
       id: data.name
     })
   },
 
-  [actions.editPost]: async function(
-    { commit, _rootState, rootGetters },
-    editedPost
-  ) {
-    const token =
-      rootGetters[`${authenticationModule}/${authenticationGetters.token}`]
-
-    await this.$apiService.editPost(token, editedPost)
-
+  [actions.editPost]: async function({ commit, dispatch }, editedPost) {
+    await dispatch(`${apiModule}/${apiActions.editPost}`, editedPost, {
+      root: true
+    })
     commit(mutations.EDIT_POST, editedPost)
   },
 
