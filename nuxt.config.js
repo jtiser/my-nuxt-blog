@@ -1,5 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
 const axios = require('axios')
+const PrismicConfig = require('./prismic.config')
 
 export default {
   mode: 'universal',
@@ -18,7 +19,17 @@ export default {
         content: process.env.npm_package_description || ''
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    script: [
+      {
+        innerHTML:
+          '{ window.prismic = { endpoint: "' +
+          PrismicConfig.apiEndpoint +
+          '"} }'
+      },
+      { src: '//static.cdn.prismic.io/prismic.min.js' }
+    ],
+    __dangerouslyDisableSanitizers: ['script']
   },
   /*
    ** Customize the progress-bar color
@@ -31,7 +42,14 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/base', '~/plugins/date-filter', '~/plugins/api-service'],
+  plugins: [
+    '~/plugins/base',
+    '~/plugins/date-filter',
+    '~/plugins/api-service',
+    '~/plugins/link-resolver.js',
+    '~/plugins/html-serializer.js',
+    '~/plugins/prismic-vue.js'
+  ],
   /*
    ** Nuxt.js dev-modules
    */
@@ -88,7 +106,9 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    extend(config, ctx) {
+      config.resolve.alias['vue'] = 'vue/dist/vue.common'
+    }
   },
   env: {
     baseUrl:
