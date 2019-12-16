@@ -4,10 +4,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import {
-  name as postsModule,
-  gettersTypes as postsGetters
-} from '@/store/posts'
+import { name as postsModule, getterTypes as postsGetters } from '@/store/posts'
 
 import PostList from '@/components/Posts/PostList'
 

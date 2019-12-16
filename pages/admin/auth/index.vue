@@ -22,11 +22,12 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" @click.prevent="onLoginClick">{{ signUp ? 'Sign up' : 'Sign in' }}</v-btn>
-          <v-btn
-            color="primary"
-            @click="signUp = !signUp"
-          >Switch to {{ signUp ? 'Sign in' : 'Sign up' }}</v-btn>
+          <v-btn color="primary" @click.prevent="onLoginClick">{{
+            signUp ? 'Sign up' : 'Sign in'
+          }}</v-btn>
+          <v-btn color="primary" @click="signUp = !signUp"
+            >Switch to {{ signUp ? 'Sign in' : 'Sign up' }}</v-btn
+          >
         </v-card-actions>
       </v-card>
     </v-flex>
@@ -36,7 +37,7 @@
 <script>
 import { mapActions } from 'vuex'
 import {
-  actionsTypes as authenticationActions,
+  actionTypes as authenticationActions,
   name as authenticationModule
 } from '@/store/authentication'
 

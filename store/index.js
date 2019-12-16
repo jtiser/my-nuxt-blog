@@ -1,4 +1,4 @@
-import { name as postModule, actionsTypes as postActions } from './posts'
+import { name as postModule, actionTypes as postActions } from './posts'
 import { name as layoutModule, actionTypes as layoutActions } from './layout'
 
 export const actions = {

@@ -10,8 +10,8 @@
 import { mapGetters, mapActions } from 'vuex'
 import {
   name as postsModule,
-  gettersTypes as postsGetters,
-  actionsTypes as postsActions
+  getterTypes as postsGetters,
+  actionTypes as postsActions
 } from '@/store/posts'
 
 import AdminPostForm from '@/components/Admin/AdminPostForm'
