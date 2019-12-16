@@ -1,10 +1,10 @@
 import { name as postModule, actionsTypes as postActions } from './posts'
-import { actions as layoutActions } from './layout'
+import { name as layoutModule, actionTypes as layoutActions } from './layout'
 
 export const actions = {
   nuxtServerInit({ dispatch }, context) {
     dispatch(
-      `layout/init`,
+      `${layoutModule}/${layoutActions.init}`,
       {},
       {
         root: true

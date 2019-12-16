@@ -1,24 +1,40 @@
 import Prismic from 'prismic-javascript'
 import PrismicConfig from '~/prismic.config.js'
 
+export const name = 'layout'
+
 export const state = () => ({
   layout: {}
 })
 
+export const getterTypes = {
+  siteName: 'siteName',
+  bannerUrl: 'bannerUrl'
+}
+
+export const getters = {
+  [getterTypes.siteName]: state => state.layout.site_name,
+  [getterTypes.bannerUrl]: state => state.layout.banner.url
+}
+
+export const mutationTypes = {
+  SET_LAYOUT_DATA: 'SET_LAYOUT_DATA'
+}
+
 export const mutations = {
-  SET_LAYOUT_DATA(state, data) {
+  [mutationTypes.SET_LAYOUT_DATA](state, data) {
     state.layout = data
   }
 }
 
-export const actions = {
-  async init({ commit }) {
-    const api = await Prismic.getApi(PrismicConfig.apiEndpoint, {})
-    console.log(api)
-    const layout = await api.getSingle('layout')
-    const test = await api.getSingle('blog_home')
-    console.log(test.data)
+export const actionTypes = {
+  init: 'init'
+}
 
-    commit('SET_LAYOUT_DATA', layout.data)
+export const actions = {
+  async [actionTypes.init]({ commit }) {
+    const api = await Prismic.getApi(PrismicConfig.apiEndpoint, {})
+    const layout = await api.getSingle('layout')
+    commit(mutationTypes.SET_LAYOUT_DATA, layout.data)
   }
 }
