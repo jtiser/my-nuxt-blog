@@ -9,12 +9,15 @@ export const state = () => ({
 
 export const getterTypes = {
   siteName: 'siteName',
-  bannerUrl: 'bannerUrl'
+  bannerUrl: 'bannerUrl',
+  navItems: 'navItems'
 }
 
 export const getters = {
   [getterTypes.siteName]: state => state.layout.site_name,
-  [getterTypes.bannerUrl]: state => state.layout.banner.url
+  [getterTypes.bannerUrl]: state =>
+    !!state.layout && !!state.layout.banner ? state.layout.banner.url : '',
+  [getterTypes.navItems]: state => state.layout.header_nav_items
 }
 
 export const mutationTypes = {
@@ -23,7 +26,9 @@ export const mutationTypes = {
 
 export const mutations = {
   [mutationTypes.SET_LAYOUT_DATA](state, data) {
+    console.log('test')
     state.layout = data
+    console.log('test2 ', state.layout)
   }
 }
 
@@ -35,6 +40,7 @@ export const actions = {
   async [actionTypes.init]({ commit }) {
     const api = await Prismic.getApi(PrismicConfig.apiEndpoint, {})
     const layout = await api.getSingle('layout')
+    console.log('layout=', layout)
     commit(mutationTypes.SET_LAYOUT_DATA, layout.data)
   }
 }

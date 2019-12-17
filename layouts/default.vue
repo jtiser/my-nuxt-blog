@@ -4,6 +4,7 @@
       v-show="showAppBar"
       :title="siteName"
       :background-img="bannerUrl"
+      :nav-items="navItems"
       @nav-icon-clicked="$refs.drawer.drawer = !$refs.drawer.drawer"
     />
 
@@ -42,7 +43,8 @@ export default {
   computed: {
     ...mapGetters(layoutModule, [
       layoutGetters.siteName,
-      layoutGetters.bannerUrl
+      layoutGetters.bannerUrl,
+      layoutGetters.navItems,
     ]),
     showAppBar() {
       return this.scrollTop || this.previousOffsetTop < this.minScrollDistance
