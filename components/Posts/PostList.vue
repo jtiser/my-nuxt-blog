@@ -2,12 +2,12 @@
   <v-layout row wrap>
     <v-flex xs12 sm6 lg3 pa-2 v-for="post in posts" :key="post.id">
       <PostPreview
-        :id="post.id"
+        :id="post.uid"
         :is-admin="isAdmin"
-        :thumbnail="post.thumbnail"
-        :title="post.title"
-        :previewText="post.previewText"
-        :date="post.updatedDate"
+        :thumbnail="post.data.image"
+        :title="post.data.title"
+        :previewText="post.data.body"
+        :date="post.first_publication_date"
       />
     </v-flex>
   </v-layout>
@@ -32,7 +32,6 @@ export default {
   }
 }
 </script>
-
 
 <style scoped>
 .post-list {

@@ -1,9 +1,11 @@
 import { name as apiModule, actionTypes as apiActions } from '@/store/api'
+import Prismic from 'prismic-javascript'
+import PrismicConfig from '~/prismic.config.js'
 
 export const name = 'posts'
 
 export const state = () => ({
-  loadedPosts: null
+  loadedPosts: []
 })
 
 export const getterTypes = {
@@ -36,12 +38,22 @@ export const mutations = {
 }
 
 export const actionTypes = {
+  init: 'init',
   addPost: 'addPost',
   editPost: 'editPost',
   setPosts: 'setPosts'
 }
 
 export const actions = {
+  async [actionTypes.init]({ commit, dispatch }) {
+    const api = await Prismic.getApi(PrismicConfig.apiEndpoint, {})
+    const posts = await api.query(
+      Prismic.Predicates.at('document.type', 'post'),
+      { pageSize: 50 }
+    )
+    dispatch(actionTypes.setPosts, posts.results)
+  },
+
   [actionTypes.addPost]: async function({ commit, dispatch }, postData) {
     const createdPost = {
       ...postData,
