@@ -1,14 +1,7 @@
 <template>
   <v-layout row wrap>
     <v-flex xs12 sm6 lg3 pa-2 v-for="post in posts" :key="post.id">
-      <PostPreview
-        :id="post.uid"
-        :is-admin="isAdmin"
-        :thumbnail="post.data.image"
-        :title="post.data.title"
-        :previewText="post.data.body"
-        :date="post.first_publication_date"
-      />
+      <PostPreview :post="post" :id="post.uid" :is-admin="isAdmin" />
     </v-flex>
   </v-layout>
 </template>
