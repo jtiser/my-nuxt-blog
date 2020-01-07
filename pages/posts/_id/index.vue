@@ -5,15 +5,14 @@
         <v-container fill-height fluid>
           <v-layout fill-height>
             <!-- Button to edit document in dashboard -->
-            <v-flex xs1>
-              <h2 class="headline">
+              <h2 class="headline mr-2">
                 <prismic-edit-button :documentId="documentId" />
               </h2>
-            </v-flex>
             <v-flex xs11 align-end flexbox>
-              <h2 class="headline" style="text-shadow: 0px 2px 5px #222;">
-                {{ $prismic.richTextAsPlain(document.title) }}
-              </h2>
+              <h2
+                class="headline"
+                style="text-shadow: 0px 2px 5px #222;"
+              >{{ $prismic.richTextAsPlain(document.title) }}</h2>
             </v-flex>
           </v-layout>
         </v-container>
