@@ -4,15 +4,15 @@
       <v-layout wrap>
         <v-flex xs9>
           <base-btn
-            v-for="(item, i) in items"
-            :key="i"
-            :href="item.href"
+            v-for="({ link, icon }, index) in socialLinks"
+            :key="index"
+            :href="to(link)"
             class="ml-0 mr-3 mb-1"
             color="primary"
             square
             target="_blank"
           >
-            <v-icon v-text="item.icon" />
+            <v-icon v-text="icon" />
           </base-btn>
         </v-flex>
         <v-spacer />
@@ -25,39 +25,24 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import {
+  name as layoutModule,
+  getterTypes as layoutGetters
+} from '@/store/layout'
+
+import PrismicDOM from 'prismic-dom'
+import linkResolver from '~/plugins/link-resolver'
+
 export default {
   name: 'Footer',
-  data: () => ({
-    items: [
-      {
-        href: '#!',
-        icon: 'mdi-twitter'
-      },
-      {
-        href: '#!',
-        icon: 'mdi-instagram'
-      },
-      {
-        href: '#!',
-        icon: 'mdi-facebook'
-      },
-      {
-        href: '#!',
-        icon: 'mdi-google-plus'
-      },
-      {
-        href: '#!',
-        icon: 'mdi-reddit'
-      },
-      {
-        href: '#!',
-        icon: 'mdi-discord'
-      },
-      {
-        href: '#!',
-        icon: 'mdi-pinterest'
-      }
-    ]
-  })
+  computed: {
+    ...mapGetters(layoutModule, [layoutGetters.socialLinks])
+  },
+  methods: {
+    to(link) {
+      return PrismicDOM.Link.url(link, linkResolver)
+    }
+  }
 }
 </script>
