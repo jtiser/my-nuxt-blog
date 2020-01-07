@@ -1,5 +1,6 @@
 <template>
   <v-app-bar
+    class="toolbar"
     fixed
     dark
     color="primary darken-2"
@@ -7,28 +8,17 @@
     :src="backgroundImg"
   >
     <template v-slot:img="{ props }">
-      <v-img
-        v-bind="props"
-        gradient="to top right, rgba(19,84,122,.5), #4a148c"
-      ></v-img>
+      <v-img v-bind="props" gradient="to top right, rgba(19,84,122,.5), #4a148c"></v-img>
     </template>
 
-    <v-app-bar-nav-icon
-      class="d-md-none"
-      @click.stop="$emit('nav-icon-clicked')"
-    ></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon class="d-md-none" @click.stop="$emit('nav-icon-clicked')"></v-app-bar-nav-icon>
 
     <v-toolbar-title>{{ title }}</v-toolbar-title>
 
     <v-spacer></v-spacer>
     <search-bar class="d-none d-md-flex" ref="search"></search-bar>
 
-    <link-btn
-      v-for="({ link, label }, index) in navItems"
-      :key="index"
-      :link="link"
-      >{{ label }}</link-btn
-    >
+    <link-btn v-for="({ link, label }, index) in navItems" :key="index" :link="link">{{ label }}</link-btn>
   </v-app-bar>
 </template>
 
@@ -60,3 +50,8 @@ export default {
   }
 }
 </script>
+<style  >
+.toolbar > .v-toolbar__content {
+  margin-top: 5px;
+}
+</style>
