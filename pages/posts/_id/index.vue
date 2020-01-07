@@ -68,4 +68,10 @@ export default {
     margin: auto;
   }
 }
+@media (min-width: 1024px) {
+  .post {
+    width: 1000px;
+    margin: auto;
+  }
+}
 </style>
