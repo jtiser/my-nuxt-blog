@@ -10,14 +10,16 @@ export const state = () => ({
 export const getterTypes = {
   siteName: 'siteName',
   bannerUrl: 'bannerUrl',
-  navItems: 'navItems'
+  navItems: 'navItems',
+  socialLinks: 'socialLinks'
 }
 
 export const getters = {
   [getterTypes.siteName]: state => state.layout.site_name,
   [getterTypes.bannerUrl]: state =>
     !!state.layout && !!state.layout.banner ? state.layout.banner.url : '',
-  [getterTypes.navItems]: state => state.layout.header_nav_items
+  [getterTypes.navItems]: state => state.layout.header_nav_items,
+  [getterTypes.socialLinks]: state => state.layout.social_nav_items
 }
 
 export const mutationTypes = {
