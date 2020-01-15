@@ -49,7 +49,7 @@ export const actions = {
     const api = await Prismic.getApi(PrismicConfig.apiEndpoint, {})
     const posts = await api.query(
       Prismic.Predicates.at('document.type', 'post'),
-      { pageSize: 50 }
+      { pageSize: 50, orderings: '[my.post.date desc]' }
     )
     dispatch(actionTypes.setPosts, posts.results)
   },
