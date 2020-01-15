@@ -93,11 +93,12 @@ export default {
     transform: translate(-50%, -50%)
 
 img
-  width: 100%
+  width: 70%
   height: auto
 
 .block-img
   margin-bottom: 24px
+  text-align: center
 
 .image-label
   display: block
