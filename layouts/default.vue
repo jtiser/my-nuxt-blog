@@ -29,8 +29,8 @@ import {
 
 export default {
   components: {
-    CoreFooter: () => import('@/components/core/Footer'),
-    CoreAppBar: () => import('@/components/core/AppBar'),
+    CoreFooter: () => import('@/components/Core/Footer'),
+    CoreAppBar: () => import('@/components/Core/AppBar'),
     CoreNavigationDrawer: () => import('@/components/core/NavigationDrawer')
   },
   data() {
