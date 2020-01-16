@@ -31,7 +31,7 @@ export default {
   components: {
     CoreFooter: () => import('@/components/Core/Footer'),
     CoreAppBar: () => import('@/components/Core/AppBar'),
-    CoreNavigationDrawer: () => import('@/components/core/NavigationDrawer')
+    CoreNavigationDrawer: () => import('@/components/Core/NavigationDrawer')
   },
   data() {
     return {
@@ -44,7 +44,7 @@ export default {
     ...mapGetters(layoutModule, [
       layoutGetters.siteName,
       layoutGetters.bannerUrl,
-      layoutGetters.navItems,
+      layoutGetters.navItems
     ]),
     showAppBar() {
       return this.scrollTop || this.previousOffsetTop < this.minScrollDistance
