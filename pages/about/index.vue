@@ -1,8 +1,15 @@
 <template>
   <section class="about-page">
     <v-card class="pa-5">
+      <div class="text-center">
+        <v-avatar height="200" width="200">
+          <v-img :src="picture.url"></v-img>
+        </v-avatar>
+      </div>
       <v-card-title class="headline">{{ $prismic.richTextAsPlain(document.title) }}</v-card-title>
-      <!-- <slices-block :slices="slices" /> -->
+      <v-card-text>
+        <section v-for="(slice, index) in slices" :key="'slice-' + index">{{slice.text}}</section>
+      </v-card-text>
     </v-card>
   </section>
 </template>
@@ -10,12 +17,8 @@
 <script>
 import Prismic from 'prismic-javascript'
 import PrismicConfig from '~/prismic.config.js'
-import SlicesBlock from '~/components/Posts/Slices/SlicesBlock'
 
 export default {
-  components: {
-    SlicesBlock
-  },
   async asyncData({ params, error, req }) {
     try {
       // Query to get API object
@@ -26,7 +29,8 @@ export default {
       // Load the edit button
       return {
         document: about.data,
-        slices: about.data.contenu
+        slices: about.data.contenu,
+        picture: about.data.picture
       }
     } catch (e) {
       error({ statusCode: 404, message: 'Page not found' })
@@ -34,7 +38,6 @@ export default {
   }
 }
 </script>
-
 
 <style scoped>
 .about-page {
