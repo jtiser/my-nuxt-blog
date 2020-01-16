@@ -1,5 +1,5 @@
 import {
-  actionsTypes as authenticationActions,
+  actionTypes as authenticationActions,
   name as authenticationModule
 } from '~/store/authentication'
 

@@ -1,5 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 const axios = require('axios')
+import Prismic from 'prismic-javascript'
+const PrismicConfig = require('./prismic.config')
 
 export default {
   mode: 'universal',
@@ -18,7 +20,17 @@ export default {
         content: process.env.npm_package_description || ''
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    script: [
+      {
+        innerHTML:
+          '{ window.prismic = { endpoint: "' +
+          PrismicConfig.apiEndpoint +
+          '"} }'
+      },
+      { src: '//static.cdn.prismic.io/prismic.min.js' }
+    ],
+    __dangerouslyDisableSanitizers: ['script']
   },
   /*
    ** Customize the progress-bar color
@@ -31,7 +43,14 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/base', '~/plugins/date-filter', '~/plugins/api-service'],
+  plugins: [
+    '~/plugins/base',
+    '~/plugins/date-filter',
+    '~/plugins/api-service',
+    '~/plugins/link-resolver.js',
+    '~/plugins/html-serializer.js',
+    '~/plugins/prismic-vue.js'
+  ],
   /*
    ** Nuxt.js dev-modules
    */
@@ -88,29 +107,90 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    extend(config, ctx) {
+      config.resolve.alias['vue'] = 'vue/dist/vue.common'
+    }
   },
   env: {
     baseUrl:
       process.env.BASE_URL || 'https://my-nuxt-blog-ec514.firebaseio.com/',
     firebaseApiKey: 'TODO'
   },
+
   generate: {
     routes: function() {
-      return axios
-        .get('https://my-nuxt-blog-ec514.firebaseio.com/posts.json')
-        .then(res => {
-          const routes = []
-          for (const key in res.data) {
-            routes.push({
-              roue: '/posts/' + key,
-              payload: {
-                postData: res.data[key]
-              }
+      // Fetch content for the homepage and generate it
+      const homepage = Prismic.getApi(PrismicConfig.apiEndpoint, {}).then(
+        api => {
+          return api
+            .query(Prismic.Predicates.at('document.type', 'homepage'))
+            .then(response => {
+              return response.results.map(payload => {
+                return {
+                  route: '/',
+                  payload
+                }
+              })
             })
-          }
-          return routes
-        })
+        }
+      )
+
+      // Fetch content for the about page and generate it
+      const aboutPage = Prismic.getApi(PrismicConfig.apiEndpoint, {}).then(
+        api => {
+          return api
+            .query(Prismic.Predicates.at('document.type', 'about_page'))
+            .then(response => {
+              return response.results.map(payload => {
+                return {
+                  route: '/about',
+                  payload
+                }
+              })
+            })
+        }
+      )
+
+      // Fetch all the blog posts to generate the Blog page
+      const blogPage = Prismic.getApi(PrismicConfig.apiEndpoint, {}).then(
+        api => {
+          return api
+            .query(Prismic.Predicates.at('document.type', 'blog_post'))
+            .then(response => {
+              return [
+                {
+                  route: `/posts`,
+                  payload: response.results
+                }
+              ]
+            })
+        }
+      )
+
+      // Fetch again all the blog posts, but this time generating each post's page
+      const blogPosts = Prismic.getApi(PrismicConfig.apiEndpoint, {}).then(
+        api => {
+          return api
+            .query(Prismic.Predicates.at('document.type', 'blog_post'))
+            .then(response => {
+              return response.results.map(payload => {
+                return {
+                  route: `/posts/${payload.uid}`,
+                  payload
+                }
+              })
+            })
+        }
+      )
+
+      // Here I return an array of the results of each promise using the spread operator.
+      // It will be passed to each page as the `payload` property of the `context` object,
+      // which is used to generate the markup of the page.
+      return Promise.all([homepage, aboutPage, blogPage, blogPosts]).then(
+        values => {
+          return [...values[0], ...values[1], ...values[2], ...values[3]]
+        }
+      )
     }
   }
 }

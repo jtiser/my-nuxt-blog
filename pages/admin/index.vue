@@ -1,7 +1,9 @@
 <template>
   <div class="admin-page">
     <section class="new-post">
-      <v-btn color="primary" @click="$router.push('/admin/new-post')">Create Post</v-btn>
+      <v-btn color="primary" @click="$router.push('/admin/new-post')"
+        >Create Post</v-btn
+      >
       <v-btn color="primary" @click="onLogout">Logout</v-btn>
     </section>
     <section class="existing-posts">
@@ -13,12 +15,9 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import { name as postsModule, getterTypes as postsGetters } from '@/store/posts'
 import {
-  name as postsModule,
-  gettersTypes as postsGetters
-} from '@/store/posts'
-import {
-  actionsTypes as authenticationActions,
+  actionTypes as authenticationActions,
   name as authenticationModule
 } from '@/store/authentication'
 

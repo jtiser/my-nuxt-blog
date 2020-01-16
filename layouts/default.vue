@@ -2,7 +2,9 @@
   <v-app dark>
     <core-app-bar
       v-show="showAppBar"
-      :title="title"
+      :title="siteName"
+      :background-img="bannerUrl"
+      :nav-items="navItems"
       @nav-icon-clicked="$refs.drawer.drawer = !$refs.drawer.drawer"
     />
 
@@ -19,6 +21,12 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import {
+  name as layoutModule,
+  getterTypes as layoutGetters
+} from '@/store/layout'
+
 export default {
   components: {
     CoreFooter: () => import('@/components/core/Footer'),
@@ -27,13 +35,17 @@ export default {
   },
   data() {
     return {
-      title: 'My blog using Nuxt',
       previousOffsetTop: 0,
       scrollTop: true,
       minScrollDistance: 800
     }
   },
   computed: {
+    ...mapGetters(layoutModule, [
+      layoutGetters.siteName,
+      layoutGetters.bannerUrl,
+      layoutGetters.navItems,
+    ]),
     showAppBar() {
       return this.scrollTop || this.previousOffsetTop < this.minScrollDistance
     }

@@ -1,5 +1,5 @@
 import {
-  gettersTypes as authenticationGetters,
+  getterTypes as authenticationGetters,
   name as authenticationModule
 } from '~/store/authentication'
 
