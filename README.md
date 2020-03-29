@@ -1,10 +1,13 @@
 # my-nuxt-blog
 
-> A nuxt showcase blog
+> A Nuxt showcase blog
+> Build with love using Nuxt, Vuetify and Prismic.
+
+[Live example](https://jtiblog.netlify.com/)
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 $ npm run install
 
